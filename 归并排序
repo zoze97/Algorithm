@@ -1,0 +1,47 @@
+// 算法框架
+第一步： 数组拆分
+[1 4 2 8 9 7 0 3]
+[1 4 2 8]  [9 7 0 3]
+第二步：合并排序
+split(array)
+merge(array)
+
+
+// 算法实现
+void mergeSort(vector<int>& arr, int left, int right) {
+  if ( left == right) {
+    return;
+  }
+  int mid = left + (right - left) / 2;
+  mergeSort(arr, left, mid - 1);
+  mergeSort(arr, mid, right);
+  merge(arr, left, mid, right);
+}
+
+void merge(vector<int>& arr, int left, int mid, int right) {
+  vector<int> temp(right - left + 1);
+  int i,j,k = 0;
+  for ( i = left, j = mid; i < mid, j <= right; i++, j++) {
+    if(arr[i] <= arr[j]) {
+      temp[k++] = arr[i];
+    } else {
+      temp[k++] = arr[j];
+    }
+  }
+  while( i < mid ) {
+    temp[k++] = arr[i++];
+  }
+  while( j <= right) {
+     temp[k++] = arr[j++]; 
+  }
+  for(int m = left; m <= right; m++ ) {
+    arr[m] = temp[m];
+  }
+}
+
+int main() {
+  vector<int> arr = {1, 4, 2, 8, 9, 7, 0, 3}
+  mergeSort(arr, 0, arr.size() - 1);
+  printVec(arr);
+  return 1;
+}
