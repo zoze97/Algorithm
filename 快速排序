@@ -1,0 +1,20 @@
+int quickSort(vector<int>& nums, int left, int right) {
+  int pivot = nums[left];  
+  while(left < right) {
+    while(nums[right] >= pivot) right--;
+    nums[left] = nums[right];
+    while(nums[left] <= pivot) left++;
+    nums[right] = nums[left]
+  }
+  nums[left] = pivot;
+  return left;
+}
+
+void sort(vector<int>& nums, int left, int right) {
+  if(left >= right) return; 
+  int index = quickSort(nums, left, right);
+  sort(nums, left, index - 1);
+  sort(nums, index + 1, right);
+}
+
+sort(nums, 0 , nums.size() - 1);
